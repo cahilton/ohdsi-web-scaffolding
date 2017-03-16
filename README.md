@@ -2,7 +2,7 @@
 
 ## Installation Guide
 * [Install Node](https://nodejs.org/en/download/)
-* Install Grunt 
+* Install Grunt (optional)
 		
 		`npm install -g grunt`
 		
