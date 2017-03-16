@@ -1,0 +1,16 @@
+{
+  "name": "acds-web-portal",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^0.12.0",
+    "grunt-contrib-watch": "^1.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "d3": "^4.7.3",
+    "express": "^4.14.0",
+    "jquery": "^3.1.1",
+    "request": "^2.79.0"
+  }
+}
