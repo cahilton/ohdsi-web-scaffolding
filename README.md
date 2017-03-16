@@ -2,9 +2,12 @@
 
 ## Installation Guide
 * [Install Node](https://nodejs.org/en/download/)
-* Install Grunt
+* Install Grunt 
+		
 		`npm install -g grunt`
-* Install project dependencies (this will download and setup dependencies such as d3 into a `node_modules` directory)
+		
+* Install project dependencies (this will download and setup dependencies such as d3 into a `node_modules` directory) 
+		
 		`npm install`
 
 ## Starting the server
