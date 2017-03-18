@@ -123,13 +123,9 @@
                   <button class="btn btn-primary btn-sm" ng-click="setView('main')">&laquo; Back</button>
                 </div>
                 <div class="col-xs-12">
-                  <p align="center">For patients on {{treatment.name}} matching {{patient.nameLast}}, {{patient.nameFirst}} by age (10yr categories) and gender {{comparator.name}}
-                  the baseline incidence rate of {{outcome.name}} is !</p>
-
-                </div>
-                <div class="col-xs-12">
-                  <h3 align="center">Risk of {{treatment.name}} with {{outcome.name}} compared with {{comparator.name}}</h3>
-                  <h5 align="center" style="color:gray">Based on analysis of treatment patients taking {{treatment.name}}</h5>
+                  <h1>Risk of {{outcome.name}} with {{treatment.name}}</h1>
+                  <p align="center">Baseline incidence of {{outcome.name}} in males aged 60-70 on {{comparator.name}} is
+                    3 events per 1000 persons every year. The incidence of insomnia in all males aged 60-70 is 2.1 events per 1000 person year.</p>
                 </div>
                 <div class="col-xs-12" style="margin-top:20px">
                   <table class="table table-striped table-hover ">
@@ -143,14 +139,14 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>Column content</td>
-                              <td>Column content</td>
-                              <td>Column content</td>
-                              <td>Column content</td>
-                            </tr>
 
+                            <tr ng-repeat="results in mock-evidence.results">
+                              <td>1</td>
+                              <td><a href="http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com:3485/?outcome={{treatment.name}}">{{r.medication}}</a></td>
+                              <td>{{r.medication}}</td>
+                              <td>{{r.medication}}</td>
+                              <td>{{r.medication}}</td>
+                            </tr>
                           </tbody>
                         </table>
                   </div>
