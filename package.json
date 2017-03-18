@@ -1,5 +1,5 @@
 {
-  "name": "acds-web-portal",
+  "name": "ohdsi-web-app",
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "^1.0.1",
