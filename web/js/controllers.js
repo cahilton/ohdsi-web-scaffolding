@@ -30,8 +30,9 @@ angular.module('controllers', [])
     $scope.patFilter = "";
   };
 
-  $scope.showTable = function() {
+  $scope.showTable = function(treatment, outcome, comparator) {
     $scope.setView('table');
+    var evidence = ohdsiService.getEvidence(treatment, outcome, comparator);
   };
 
   var getPatient = function(id) {
