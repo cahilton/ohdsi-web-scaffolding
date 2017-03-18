@@ -26,10 +26,12 @@ angular.module('controllers', [])
     $scope.comparator = {};
     $scope.comparators = [];
     $scope.patFilter = "";
+$scope.evidence = [];
   };
 
   $scope.showTable = function(treatment, outcome, comparator) {
     $scope.setView('table');
+    $scope.evidence = [];
     var obj = {};
     obj.CONCEPT_ID = [];
     obj.CONCEPT_ID.push(parseInt($('#compSelect').val(), 10));
