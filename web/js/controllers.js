@@ -2,6 +2,8 @@ angular.module('controllers', [])
 .controller('ohdsiInformerCtrl', ['$scope', 'ohdsiService', 'fhirService', '$timeout', '$http', '$location',
   function($scope, ohdsiService, fhirService, $timeout, $http, $location) {
 
+  $scope.view = "main";
+
   $scope.outcome = {};
   $scope.treatment = {};
   $scope.patient = {
@@ -56,10 +58,16 @@ angular.module('controllers', [])
   }
 
   $scope.medicationClicked = function(item) {
-
+    $scope.treatment.name = item.resource.medicationCodeableConcept.coding[0].display;
+    $scope.treatment.code = item.resource.medicationCodeableConcept.coding[0].code;
+    $scope.treatment.system = item.resource.medicationCodeableConcept.coding[0].system;
+    console.log(item);
   };
 
   $scope.conditionClicked = function(item) {
-
+    console.log(item);
+    $scope.outcome.name = item.resource.code.coding[0].display;
+    $scope.outcome.code = item.resource.code.coding[0].code;
+    $scope.outcome.system = item.resource.code.coding[0].system;
   };
 }]);

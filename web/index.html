@@ -37,18 +37,23 @@
 
     <div class="ng-cloak main-container container-fluid" ng-controller="ohdsiInformerCtrl">
 
-      <div class="row main-row">
+      <div class="row main-row" ng-show="view === 'main'">
+
         <div class="col-xs-3 sidebar patient-info" >
+
           <div>
             <h3><b>{{patient.nameLast}}, {{patient.nameFirst}}</b></h3>
             <h5 style="color:gray">{{patient.age}} yo {{patient.sex}}</h5>
           </div>
           <hr>
           <div>
+            <div>
+              <input type="text" ng-model="patFilter" class="form-control" placeholder="Filter problems and medications..."/>
+            </div>
             <h4>Problems:</h4>
             <div>
               <ul>
-                <li ng-repeat="c in patient.conditions">
+                <li ng-repeat="c in patient.conditions | filter:patFilter">
                   <a ng-click="conditionClicked(c)">{{c.resource.code.coding[0].display}}</a>
                 </li>
               </ul>
@@ -59,7 +64,7 @@
             <h4>Medications:</h4>
             <div>
               <ul>
-                <li ng-repeat="c in patient.medications">
+                <li ng-repeat="c in patient.medications | filter:patFilter">
                   <a ng-click="medicationClicked(c)">{{c.resource.medicationCodeableConcept.coding[0].display}}</a>
                 </li>
               </ul>
@@ -93,7 +98,7 @@
               </div>
             </div>
             <div ng-if="treatment.name && treatment.name !== '' && outcome.name && outcome.name != ''">
-              <h4>What would you like to compare to Zoloft in terms of risk of Insomnia?</h4>
+              <h4>What would you like to compare to {{treatment.name}} in terms of risk of {{outcome.name}}?</h4>
               <div class="row">
                 <div class="col-xs-8">
                   <input class="form-control"  />
@@ -107,6 +112,9 @@
           <hr>
 
         </div>
+      </div>
+      <div class="row" ng-show="view === 'table'">
+
       </div>
     </div>
     </div> <!-- /container -->
