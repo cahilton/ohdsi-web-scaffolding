@@ -12,6 +12,7 @@
     <title>OHDSI Informer</title>
 
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/flatly.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
 
   </head>
@@ -39,14 +40,47 @@
       <div class="row main-row">
         <div class="col-xs-3 sidebar patient-info" >
           <div>
-            <h4><b>{{patient.nameLast}}, {{patient.nameFirst}}</b></h4>
-            <h5>{{patient.sex}}, {{patient.age}} yo</h5>
+            <h3><b>{{patient.nameLast}}, {{patient.nameFirst}}</b></h3>
+            <h5 style="color:gray">{{patient.age}} yo {{patient.sex}}</h5>
+          </div>
+          <hr>
+          <div>
+            <h4>Problems:</h4>
+          </div>
+          <hr>
+          <div>
+            <h4>Medications:</h4>
+          </div>
+          <hr>
+          <div>
+            <h4>Time Window</h4>
           </div>
         </div>
 
         <div class="col-xs-9 main-content">
           <div id="question-section">
-            <h4>Questions</h4>
+            <div>
+              <h4>What treatment are you interested in?</h4>
+              <div class="row">
+                <div class="col-xs-8">
+                  <input class="form-control" ng-model="treatment"/>
+                </div>
+                <div class="col-xs-4">
+
+                </div>
+              </div>
+            </div>
+            <div>
+              <h4>What outcome are you interested in?</h4>
+              <div class="row">
+                <div class="col-xs-8">
+                  <input class="form-control" ng-model="outcome" />
+                </div>
+                <div class="col-xs-4">
+
+                </div>
+              </div>
+            </div>
           </div>
           <hr>
           <div id="answer-section">
