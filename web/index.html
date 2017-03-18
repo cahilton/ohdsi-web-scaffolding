@@ -131,7 +131,6 @@
                   <table class="table table-striped table-hover ">
                           <thead>
                             <tr>
-                              <th>#</th>
                               <th>Medication</th>
                               <th>Relative Risk</th>
                               <th>Confidence Interval</th>
@@ -140,12 +139,11 @@
                           </thead>
                           <tbody>
 
-                            <tr ng-repeat="results in mock-evidence.results">
-                              <td>1</td>
-                              <td><a href="http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com:3485/?outcome={{treatment.name}}">{{r.medication}}</a></td>
-                              <td>{{r.medication}}</td>
-                              <td>{{r.medication}}</td>
-                              <td>{{r.medication}}</td>
+                            <tr ng-repeat="r in evidence">
+                              <td><a target="_blank" href="http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com:3485/?outcome={{outcome.name}}">{{r.condition_concept_name}}</a></td>
+                              <td></td>
+                              <td></td>
+                              <td>{{r.ir_itt_1000pp}}</td>
                             </tr>
                           </tbody>
                         </table>

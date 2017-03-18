@@ -5,20 +5,39 @@ function toTitleCase(str)
 angular.module('services', [])
 .service('ohdsiService', ['$http', '$q', function($http, $q){
     var self = this;
-    this.getEvidence = function(targetId, outcomeId, comparatorId) {
+    this.getEvidence = function(targetId, outcomeId, codes) {
         var deferred = $q.defer();
-        var baseUrl = 'http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com/informer-api/depression_results';
-        //$http.get(baseUrl + '?outcomeid=' + outcomeId +'&targetid=' + targetid + "&comparatorId=" + comparatorId)
-        $http.get(baseUrl + 'outcomeid='+ outcomeId +
-          '&targetid=' + targetId + '&comparatorid=' + comparatorId)
-            .then(function(res) {
-                console.log(res);
-                deferred.resolve(res.data.entry);
-            }, function(err) {
-                console.log(err);
-                deferred.reject(err);
-            });
+        var res = [];
+        for (var i in codes) {
+          $http.get("http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com/informer-api/irs?"
+            + '?condition_concept_id='+ outcomeId
+            + '&drug_concept_id=' + codes[i])
+              .then(function(resp) {
+                  //console.log(resp);
+                  var orig = res;
+                  res = orig.concat(resp.data);
+                  if (+i === codes.length - 1) {
+
+                    deferred.resolve(res);
+                  }
+              }, function(err) {
+              });
+
+
+        }
         return deferred.promise;
+        // var baseUrl = 'http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com/informer-api/depression_results';
+        // //$http.get(baseUrl + '?outcomeid=' + outcomeId +'&targetid=' + targetid + "&comparatorId=" + comparatorId)
+        // $http.get(baseUrl + '?outcomeid='+ outcomeId +
+        //   '&targetid=' + targetId + '&comparatorid=' + comparatorId)
+        //     .then(function(res) {
+        //         console.log(res);
+        //         deferred.resolve(res.data.entry);
+        //     }, function(err) {
+        //         console.log(err);
+        //         deferred.reject(err);
+        //     });
+        // return deferred.promise;
     };
 
     this.getIncidentRate = function(targetId) {

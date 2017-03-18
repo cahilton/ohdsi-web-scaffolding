@@ -14,6 +14,8 @@ angular.module('controllers', [])
   $scope.comparators = [
   ];
 
+  $scope.evidence = [];
+
   $scope.setView = function (v) {
     $scope.view = v;
   };
@@ -43,12 +45,13 @@ angular.module('controllers', [])
       success: function( data ) {
         console.log(data)
         var codes = data.map(function(d) {
-          return d.CONCEPT_NAME.toLowerCase();
+          return d.CONCEPT_ID;
         });
 
-        ohdsiService.getEvidence($scope.treatment.code, $scope.outcome.code, codes.join(','))
+        ohdsiService.getEvidence($scope.treatment.code, $scope.outcome.code, codes)
         .then(function(success) {
           console.log(success);
+          $scope.evidence = success;
         }, function(error) {
           console.log(error);
         })
