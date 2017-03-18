@@ -23,6 +23,10 @@ angular.module('controllers', [])
     $scope.view = v;
   };
 
+  $scope.showTable = function() {
+    $scope.setView('table');
+  };
+
   var getPatient = function(id) {
     fhirService.getPatient(id)
     .then(function(res) {

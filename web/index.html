@@ -102,13 +102,17 @@
               <h4>What would you like to compare to {{treatment.name}} in terms of risk of {{outcome.name}}?</h4>
               <div class="row">
                 <div class="col-xs-8">
-                  <select name="compSelect" id="compSelect" ng-model="comparator" ng-change="setView('table')">
+                  <select name="compSelect" id="compSelect" ng-model="comparator">
                     <option ng-repeat="option in comparators"
                       value="{{option.name}}">{{option.name}}</option>
                   </select>
                 </div>
                 <div class="col-xs-4">
-
+                </div>
+              </div>
+              <div class="row" style="margin-top:10px">
+                <div class="col-xs-12">
+                  <button class="btn btn-sm btn-success" ng-click="showTable()">Go &raquo;</button>
                 </div>
               </div>
             </div>
