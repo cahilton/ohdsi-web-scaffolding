@@ -12,11 +12,6 @@ angular.module('controllers', [])
   };
 
   $scope.comparators = [
-    { 'name': 'All Antidepressants'},
-    { 'name' : 'Prozac' },
-    { 'name': 'Paxil' },
-    { 'name' :'Lexapro' },
-    { 'name' : 'Celexa' }
   ];
 
   $scope.setView = function (v) {
@@ -27,6 +22,7 @@ angular.module('controllers', [])
     $scope.outcome = {};
     $scope.treatment = {};
     $scope.comparator = {};
+    $scope.comparators = [];
     $scope.patFilter = "";
   };
 
@@ -123,7 +119,13 @@ angular.module('controllers', [])
           data: JSON.stringify(obj),
           contentType: "application/json; charset=utf-8",
           success: function( data ) {
-            console.log(data);
+            $scope.comparators = data;
+            try {
+              $scope.$apply();
+            } catch (e) {
+              console.log(e);
+            }
+
           }
         });
     }
