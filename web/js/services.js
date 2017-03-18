@@ -9,15 +9,16 @@ angular.module('services', [])
         var deferred = $q.defer();
         var res = [];
         for (var i in codes) {
-          $http.get("http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com/informer-api/irs?"
-            + '?condition_concept_id='+ outcomeId
-            + '&drug_concept_id=' + codes[i])
+          var url = "http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com/informer-api/irs?"
+            + 'condition_concept_id='+ outcomeId
+            + '&drug_concept_id=' + codes[i];
+          $http.get(url)
               .then(function(resp) {
                   //console.log(resp);
-                  var orig = res;
-                  res = orig.concat(resp.data);
-                  if (+i === codes.length - 1) {
-
+                  if (resp.data && resp.data.length > 0) {
+                    res.push(resp.data[0]);
+                  }
+                  if ((+i) === (codes.length - 1)) {
                     deferred.resolve(res);
                   }
               }, function(err) {
