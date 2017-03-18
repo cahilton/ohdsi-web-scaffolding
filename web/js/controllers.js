@@ -26,7 +26,11 @@ angular.module('controllers', [])
     $scope.comparator = {};
     $scope.comparators = [];
     $scope.patFilter = "";
-$scope.evidence = [];
+    $scope.evidence = [];
+  };
+
+  $scope.formatDecimal = function(d) {
+    return Math.round(+d * 1000) / 1000
   };
 
   $scope.showTable = function(treatment, outcome, comparator) {
@@ -45,17 +49,17 @@ $scope.evidence = [];
       data: JSON.stringify(obj),
       contentType: "application/json; charset=utf-8",
       success: function( data ) {
-        console.log(data)
         var codes = data.map(function(d) {
           return d.CONCEPT_ID;
         });
 
         ohdsiService.getEvidence($scope.treatment.code, $scope.outcome.code, codes)
         .then(function(success) {
-          console.log(success);
+
+
           $scope.evidence = success;
         }, function(error) {
-          console.log(error);
+
         })
       }
     });
@@ -65,21 +69,17 @@ $scope.evidence = [];
   var getPatient = function(id) {
     fhirService.getPatient(id)
     .then(function(res) {
-      console.log(res);
       $scope.patient = res;
       fhirService.getMedications(id)
         .then(function(res) {
           $scope.patient.medications = res;
-          console.log(res);
+
         }, function(err) {
-          console.log(err);
         });
       fhirService.getConditions(id)
         .then(function(res) {
           $scope.patient.conditions = res;
-          console.log(res);
         }, function(err) {
-          console.log(err);
         });
     }, function(err) {
       console.log('unabeld to read patient');
@@ -120,7 +120,6 @@ $scope.evidence = [];
   };
 
   $scope.conditionClicked = function(item) {
-    console.log(item);
     $scope.outcome.name = item.resource.code.coding[0].display;
     $scope.outcome.code = item.resource.code.coding[0].code;
     $scope.outcome.system = item.resource.code.coding[0].system;

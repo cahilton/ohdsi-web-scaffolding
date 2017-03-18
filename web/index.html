@@ -139,11 +139,11 @@
                           </thead>
                           <tbody>
 
-                            <tr ng-repeat="r in evidence track by $index">
+                            <tr ng-repeat="r in evidence track by $index ">
                               <td><a target="_blank" href="http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com:3485/?outcome={{outcome.name}}">{{r.drug_name}}</a></td>
                               <td></td>
                               <td></td>
-                              <td>{{r.ir_itt_1000pp}}</td>
+                              <td>{{ formatDecimal(r.ir_itt_1000pp) }}</td>
                             </tr>
                           </tbody>
                         </table>

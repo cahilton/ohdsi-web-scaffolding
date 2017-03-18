@@ -18,7 +18,7 @@ angular.module('services', [])
                   if (resp.data && resp.data.length > 0) {
                     res.push(resp.data[0]);
                   }
-                  if ((+i) === (codes.length - 1)) {
+                  if ((+i) === (codes.length - 1) && res.length > 0) {
                     deferred.resolve(res);
                   }
               }, function(err) {
