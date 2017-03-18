@@ -8,15 +8,14 @@ angular.module('services', [])
     this.getEvidence = function(targetId, outcomeId, comparatorId) {
         var deferred = $q.defer();
         var baseUrl = 'http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com/informer-api/depression_results';
-        outcomeId = '2556';
-        $http.get(baseUrl + /*+'?targetID=' + targetId +*/ "&outcomeID=" + outcomeId /*+ "&comparatorId=" + comparatorId*/)
+        //$http.get(baseUrl + '?outcomeID=' + outcomeId +'&targetID=' + targetId + "&comparatorId=" + comparatorId)
+        $http.get(baseUrl + '?outcomeID=' + 2556 /*+'&targetID=' + targetId + "&comparatorId=" + comparatorId*/)
             .then(function(res) {
                 deferred.resolve(res.data.entry);
             }, function(err) {
                 console.log(response);
                 deferred.reject(response);
             });
-
         return deferred.promise;
     };
 }])
