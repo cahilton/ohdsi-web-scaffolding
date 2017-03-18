@@ -6,10 +6,22 @@ angular.module('controllers', [])
 
   $scope.outcome = {};
   $scope.treatment = {};
+  $scope.comparator = {};
   $scope.patient = {
     id : 1
   };
 
+  $scope.comparators = [
+    { 'name': 'All Antidepressants'},
+    { 'name' : 'Prozac' },
+    { 'name': 'Paxil' },
+    { 'name' :'Lexapro' },
+    { 'name' : 'Celexa' }
+  ];
+
+  $scope.setView = function (v) {
+    $scope.view = v;
+  };
 
   var getPatient = function(id) {
     fhirService.getPatient(id)
