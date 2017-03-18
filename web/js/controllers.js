@@ -112,7 +112,7 @@ angular.module('controllers', [])
         obj.CONCEPT_ID = [];
         obj.CONCEPT_ID.push(parseInt($scope.treatment.code, 10));
         obj.VOCABULARY_ID = ["ATC"];
-        obj.CONCEPT_CLASS_ID = ["ATC 3rd","ATC 4th"];
+        obj.CONCEPT_CLASS_ID = ["ATC 3rd","ATC 4th", "ATC 2nd"];
         $.ajax({
           url:  "http://api.ohdsi.org/WebAPI/vocabulary/1PCT/relatedconcepts",
           dataType: "json",
