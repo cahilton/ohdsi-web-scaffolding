@@ -46,25 +46,26 @@
           <hr>
           <div>
             <h4>Problems:</h4>
+            <div>
+              <ul>
+                <li ng-repeat="c in patient.conditions">
+                  <a ng-click="conditionClicked(c)">{{c.resource.code.coding[0].display}}</a>
+                </li>
+              </ul>
+            </div>
           </div>
           <hr>
           <div>
             <h4>Medications:</h4>
-          </div>
-          <hr>
-          <div>
-            <h4>Time Window:</h4>
-            <label><input type="radio" ng-model="timeWindow" ng-value="byDate"/> By Date</label>
-            <label style="margin-left:10px"><input type="radio" ng-model="timeWindow" ng-value="byIndex"/> By Index</label>
             <div>
-              <h5>Start Date</h5>
-              <input type="date" ng-model="startDate" />
-            </div>
-            <div>
-              <h5>End Date</h5>
-              <input type="date" ng-model="endDate" />
+              <ul>
+                <li ng-repeat="c in patient.medications">
+                  <a ng-click="medicationClicked(c)">{{c.resource.medicationCodeableConcept.coding[0].display}}</a>
+                </li>
+              </ul>
             </div>
           </div>
+
         </div>
 
         <div class="col-xs-9 main-content">
@@ -111,6 +112,7 @@
     </div> <!-- /container -->
 
     <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="js/date.js"</script>
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="lib/d3/build/d3.min.js"></script>
     <!--1.6.3-->
