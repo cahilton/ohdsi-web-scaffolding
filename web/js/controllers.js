@@ -84,6 +84,7 @@ angular.module('controllers', [])
     $scope.treatment.system = item.resource.medicationCodeableConcept.coding[0].system;
     $scope.patFilter = "";
     $scope.lookupComparator();
+    $( "#outcomeName" ).focus();
   };
 
   $scope.conditionClicked = function(item) {
@@ -163,6 +164,7 @@ angular.module('controllers', [])
             $scope.$apply();
           } catch (e) { console.log(e);}
           $scope.lookupComparator();
+          $( "#outcomeName" ).focus();
           return false;
       }
     } );
