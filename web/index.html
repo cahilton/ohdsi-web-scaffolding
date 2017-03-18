@@ -12,6 +12,7 @@
     <title>OHDSI Informer</title>
 
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/jquery-ui-dist/jquery-ui.min.css" rel="stylesheet">
     <link href="css/flatly.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
 
@@ -79,7 +80,7 @@
               <h4>What treatment are you interested in?</h4>
               <div class="row">
                 <div class="col-xs-8">
-                  <input class="form-control" ng-model="treatment.name"/>
+                  <input id="treatmentName" class="form-control" ng-model="treatment.name"/>
                 </div>
                 <div class="col-xs-4">
 
@@ -90,7 +91,7 @@
               <h4>What outcome are you interested in?</h4>
               <div class="row">
                 <div class="col-xs-8">
-                  <input class="form-control" ng-model="outcome.name" />
+                  <input id="outcomeName" class="form-control" ng-model="outcome.name" />
                 </div>
                 <div class="col-xs-4">
 
@@ -98,7 +99,7 @@
               </div>
             </div>
         </div>
-            <div ng-if="treatment.name && treatment.name !== '' && outcome.name && outcome.name != ''">
+            <div ng-if="treatment.code && treatment.code !== '' && outcome.code && outcome.code != ''">
               <h4>What would you like to compare to {{treatment.name}} in terms of risk of {{outcome.name}}?</h4>
               <div class="row">
                 <div class="col-xs-8">
@@ -158,6 +159,7 @@
     </div> <!-- /container -->
 
     <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/jquery-ui-dist/jquery-ui.min.js"></script>
     <script src="js/date.js"</script>
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="lib/d3/build/d3.min.js"></script>

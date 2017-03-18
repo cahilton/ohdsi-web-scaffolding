@@ -94,4 +94,84 @@ angular.module('controllers', [])
     $scope.outcome.system = item.resource.code.coding[0].system;
     $scope.patFilter = "";
   };
+
+  $scope.setTreatment = function(name, code) {
+    $scope.treatment.name = name;
+    $scope.treatment.code = code;
+  }
+
+  $scope.setOutcome = function(name, code) {
+    $scope.outcome.name = name;
+    $scope.outcome.code = code;
+  }
+
+  $( "#treatmentName" ).autocomplete({
+    source: function (request, response) {
+      var obj = {};
+      obj.QUERY = request.term;
+      obj.VOCABULARY_ID = ["RxNorm"];
+      obj.CONCEPT_CLASS_ID = ['Ingredient', 'Brand Name'];
+
+      $.ajax({
+        url:  "http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com:8080/WebAPI/omop_v5/vocabulary/search/",
+        dataType: "json",
+        type : "POST",
+        data: JSON.stringify(obj),
+        contentType: "application/json; charset=utf-8",
+        success: function( data ) {
+          var res = data.map(function (d) {
+            var obj = {};
+            obj.label = d.CONCEPT_NAME;
+            obj.value = d.CONCEPT_CODE;
+            return obj;
+          });
+          response( res );
+        }
+      });
+    },
+      minLength: 3,
+      select: function( event, ui ) {
+          $('#treatmentName').val(ui.item.label);
+          $scope.setTreatment(ui.item.label, ui.item.value);
+          try {
+            $scope.$apply();
+          } catch (e) { console.log(e);}
+          return false;
+      }
+    } );
+
+    $( "#outcomeName" ).autocomplete({
+      source: function (request, response) {
+        var obj = {};
+        obj.QUERY = request.term;
+        obj.VOCABULARY_ID = ["SNOMED"];
+        obj.CONCEPT_CLASS_ID  = ["Clinical Finding"];
+
+        $.ajax({
+          url:  "http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com:8080/WebAPI/omop_v5/vocabulary/search/",
+          dataType: "json",
+          type : "POST",
+          data: JSON.stringify(obj),
+          contentType: "application/json; charset=utf-8",
+          success: function( data ) {
+            var res = data.map(function (d) {
+              var obj = {};
+              obj.label = d.CONCEPT_NAME;
+              obj.value = d.CONCEPT_CODE;
+              return obj;
+            });
+            response( res );
+          }
+        });
+      },
+        minLength: 3,
+        select: function( event, ui ) {
+            $('#outcomeName').val(ui.item.label);
+            $scope.setOutcome(ui.item.label, ui.item.value);
+            try {
+              $scope.$apply();
+            } catch (e) { console.log(e);}
+            return false;
+        }
+      } );
 }]);

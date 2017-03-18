@@ -14,8 +14,8 @@ angular.module('services', [])
     .then(function(res) {
       deferred.resolve(res.data.entry);
     }, function(err) {
-      console.log(response);
-      deferred.reject(repsonse);
+      console.log(err);
+      deferred.reject(err);
     });
 
     return deferred.promise;
@@ -27,8 +27,8 @@ angular.module('services', [])
     .then(function(res) {
       deferred.resolve(res.data.entry);
     }, function(err) {
-      console.log(response);
-      deferred.reject(repsonse);
+      console.log(err);
+      deferred.reject(err);
     });
     return deferred.promise;
   };
@@ -48,8 +48,8 @@ angular.module('services', [])
       }
       deferred.resolve(d);
     }, function(err) {
-      console.log(response);
-      deferred.reject(repsonse);
+      console.log(err);
+      deferred.reject(err);
     });
     return deferred.promise;
   };
