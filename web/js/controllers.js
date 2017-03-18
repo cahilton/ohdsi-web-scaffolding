@@ -28,7 +28,33 @@ angular.module('controllers', [])
 
   $scope.showTable = function(treatment, outcome, comparator) {
     $scope.setView('table');
-    var evidence = ohdsiService.getEvidence(treatment, outcome, comparator);
+    var obj = {};
+    obj.CONCEPT_ID = [];
+    obj.CONCEPT_ID.push(parseInt($('#compSelect').val(), 10));
+    obj.VOCABULARY_ID = ["RxNorm"];
+    obj.CONCEPT_CLASS_ID = ["Ingredient"];
+
+    $.ajax({
+      url:  "http://api.ohdsi.org/WebAPI/vocabulary/1PCT/relatedconcepts",
+      dataType: "json",
+      type : "POST",
+      data: JSON.stringify(obj),
+      contentType: "application/json; charset=utf-8",
+      success: function( data ) {
+        console.log(data)
+        var codes = data.map(function(d) {
+          return d.CONCEPT_NAME.toLowerCase();
+        });
+
+        ohdsiService.getEvidence($scope.treatment.code, $scope.outcome.code, codes.join(','))
+        .then(function(success) {
+          console.log(success);
+        }, function(error) {
+          console.log(error);
+        })
+      }
+    });
+    //var evidence = ohdsiService.getEvidence(treatment, outcome, comparator);
   };
 
   var getPatient = function(id) {
@@ -157,7 +183,7 @@ angular.module('controllers', [])
         }
       });
     },
-      minLength: 3,
+      minLength: 5,
       select: function( event, ui ) {
           $('#treatmentName').val(ui.item.label);
           $scope.setTreatment(ui.item.label, ui.item.value);
@@ -194,7 +220,7 @@ angular.module('controllers', [])
           }
         });
       },
-        minLength: 3,
+        minLength: 5,
         select: function( event, ui ) {
             $('#outcomeName').val(ui.item.label);
             $scope.setOutcome(ui.item.label, ui.item.value);

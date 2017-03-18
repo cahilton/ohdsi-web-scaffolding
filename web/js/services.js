@@ -8,13 +8,29 @@ angular.module('services', [])
     this.getEvidence = function(targetId, outcomeId, comparatorId) {
         var deferred = $q.defer();
         var baseUrl = 'http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com/informer-api/depression_results';
-        //$http.get(baseUrl + '?outcomeID=' + outcomeId +'&targetID=' + targetId + "&comparatorId=" + comparatorId)
-        $http.get(baseUrl + '?outcomeID=' + 2556 /*+'&targetID=' + targetId + "&comparatorId=" + comparatorId*/)
+        //$http.get(baseUrl + '?outcomeid=' + outcomeId +'&targetid=' + targetid + "&comparatorId=" + comparatorId)
+        $http.get(baseUrl + 'outcomeid='+ outcomeId +
+          '&targetid=' + targetId + '&comparatorid=' + comparatorId)
             .then(function(res) {
+                console.log(res);
                 deferred.resolve(res.data.entry);
             }, function(err) {
-                console.log(response);
-                deferred.reject(response);
+                console.log(err);
+                deferred.reject(err);
+            });
+        return deferred.promise;
+    };
+
+    this.getIncidentRate = function(targetId) {
+        var deferred = $q.defer();
+        var baseUrl = 'http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com/informer-api/irs';
+        $http.get(baseUrl + '?condition_concept_id=' + targetId)
+            .then(function(res) {
+                console.log(res);
+                deferred.resolve(res.data.entry);
+            }, function(err) {
+                console.log(err);
+                deferred.reject(err);
             });
         return deferred.promise;
     };
