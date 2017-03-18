@@ -4,7 +4,21 @@ function toTitleCase(str)
 }
 angular.module('services', [])
 .service('ohdsiService', ['$http', '$q', function($http, $q){
+    var self = this;
+    this.getEvidence = function(targetId, outcomeId, comparatorId) {
+        var deferred = $q.defer();
+        var baseUrl = 'http://ec2-54-70-205-229.us-west-2.compute.amazonaws.com/informer-api/depression_results';
+        outcomeId = '2556';
+        $http.get(baseUrl + /*+'?targetID=' + targetId +*/ "&outcomeID=" + outcomeId /*+ "&comparatorId=" + comparatorId*/)
+            .then(function(res) {
+                deferred.resolve(res.data.entry);
+            }, function(err) {
+                console.log(response);
+                deferred.reject(response);
+            });
 
+        return deferred.promise;
+    };
 }])
 .service('fhirService', ['$http', '$q', function($http, $q){
   var self = this;
