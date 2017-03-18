@@ -125,6 +125,11 @@
                   <button class="btn btn-primary btn-sm" ng-click="setView('main')">&laquo; Back</button>
                 </div>
                 <div class="col-xs-12">
+                  <p align="center">For patients on {{treatment.name}} matching {{patient.nameLast}}, {{patient.nameFirst}} by age (10yr categories) and gender {{comparator.name}}
+                  the baseline incidence rate of {{outcome.name}} is !</p>
+
+                </div>
+                <div class="col-xs-12">
                   <h3 align="center">Risk of {{treatment.name}} with {{outcome.name}} compared with {{comparator.name}}</h3>
                   <h5 align="center" style="color:gray">Based on analysis of treatment patients taking {{treatment.name}}</h5>
                 </div>
@@ -133,14 +138,16 @@
                           <thead>
                             <tr>
                               <th>#</th>
-                              <th>Column heading</th>
-                              <th>Column heading</th>
-                              <th>Column heading</th>
+                              <th>Medication</th>
+                              <th>Relative Risk</th>
+                              <th>Confidence Interval</th>
+                              <th>Incidence Rate/1000</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <td>1</td>
+                              <td>Column content</td>
                               <td>Column content</td>
                               <td>Column content</td>
                               <td>Column content</td>
