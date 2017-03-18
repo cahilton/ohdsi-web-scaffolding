@@ -85,6 +85,7 @@ angular.module('controllers', [])
     $scope.treatment.code = item.resource.medicationCodeableConcept.coding[0].code;
     $scope.treatment.system = item.resource.medicationCodeableConcept.coding[0].system;
     $scope.patFilter = "";
+    $scope.lookupComparator();
   };
 
   $scope.conditionClicked = function(item) {
@@ -93,6 +94,7 @@ angular.module('controllers', [])
     $scope.outcome.code = item.resource.code.coding[0].code;
     $scope.outcome.system = item.resource.code.coding[0].system;
     $scope.patFilter = "";
+    $scope.lookupComparator();
   };
 
   $scope.setTreatment = function(name, code) {
@@ -104,6 +106,26 @@ angular.module('controllers', [])
     $scope.outcome.name = name;
     $scope.outcome.code = code;
   }
+
+  $scope.lookupComparator = function() {
+    if ($scope.treatment.code && $scope.treatment.code.length > 0) {
+        var obj = {};
+        obj.CONCEPT_ID = [];
+        obj.CONCEPT_ID.push(parseInt($scope.treatment.code, 10));
+        obj.VOCABULARY_ID = ["ATC"];
+        obj.CONCEPT_CLASS_ID = ["ATC 3rd","ATC 4th"];
+        $.ajax({
+          url:  "http://api.ohdsi.org/WebAPI/vocabulary/1PCT/relatedconcepts",
+          dataType: "json",
+          type : "POST",
+          data: JSON.stringify(obj),
+          contentType: "application/json; charset=utf-8",
+          success: function( data ) {
+            console.log(data);
+          }
+        });
+    }
+  };
 
   $( "#treatmentName" ).autocomplete({
     source: function (request, response) {
@@ -122,7 +144,7 @@ angular.module('controllers', [])
           var res = data.map(function (d) {
             var obj = {};
             obj.label = d.CONCEPT_NAME;
-            obj.value = d.CONCEPT_CODE;
+            obj.value = d.CONCEPT_ID + "";
             return obj;
           });
           response( res );
@@ -136,6 +158,7 @@ angular.module('controllers', [])
           try {
             $scope.$apply();
           } catch (e) { console.log(e);}
+          $scope.lookupComparator();
           return false;
       }
     } );
@@ -157,7 +180,7 @@ angular.module('controllers', [])
             var res = data.map(function (d) {
               var obj = {};
               obj.label = d.CONCEPT_NAME;
-              obj.value = d.CONCEPT_CODE;
+              obj.value = d.CONCEPT_ID + "";
               return obj;
             });
             response( res );
@@ -171,6 +194,7 @@ angular.module('controllers', [])
             try {
               $scope.$apply();
             } catch (e) { console.log(e);}
+            $scope.lookupComparator();
             return false;
         }
       } );
