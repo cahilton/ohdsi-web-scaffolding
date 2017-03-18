@@ -23,6 +23,17 @@ angular.module('controllers', [])
     $scope.view = v;
   };
 
+  $scope.clear = function() {
+    $scope.outcome = {};
+    $scope.treatment = {};
+    $scope.comparator = {};
+    $scope.patFilter = "";
+  };
+
+  $scope.showTable = function() {
+    $scope.setView('table');
+  };
+
   var getPatient = function(id) {
     fhirService.getPatient(id)
     .then(function(res) {
@@ -75,7 +86,7 @@ angular.module('controllers', [])
     $scope.treatment.name = item.resource.medicationCodeableConcept.coding[0].display;
     $scope.treatment.code = item.resource.medicationCodeableConcept.coding[0].code;
     $scope.treatment.system = item.resource.medicationCodeableConcept.coding[0].system;
-    console.log(item);
+    $scope.patFilter = "";
   };
 
   $scope.conditionClicked = function(item) {
@@ -83,5 +94,6 @@ angular.module('controllers', [])
     $scope.outcome.name = item.resource.code.coding[0].display;
     $scope.outcome.code = item.resource.code.coding[0].code;
     $scope.outcome.system = item.resource.code.coding[0].system;
+    $scope.patFilter = "";
   };
 }]);
