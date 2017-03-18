@@ -2,6 +2,8 @@ angular.module('controllers', [])
 .controller('ohdsiInformerCtrl', ['$scope', 'ohdsiService', '$timeout', '$http', '$location',
   function($scope, ohdsiService, $timeout, $http, $location) {
 
+  $scope.outcome = {};
+  $scope.treatment = {};
   $scope.patient = {
     nameLast : "Thomas",
     nameFirst : "Louie",

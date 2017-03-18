@@ -53,7 +53,17 @@
           </div>
           <hr>
           <div>
-            <h4>Time Window</h4>
+            <h4>Time Window:</h4>
+            <label><input type="radio" ng-model="timeWindow" ng-value="byDate"/> By Date</label>
+            <label style="margin-left:10px"><input type="radio" ng-model="timeWindow" ng-value="byIndex"/> By Index</label>
+            <div>
+              <h5>Start Date</h5>
+              <input type="date" ng-model="startDate" />
+            </div>
+            <div>
+              <h5>End Date</h5>
+              <input type="date" ng-model="endDate" />
+            </div>
           </div>
         </div>
 
@@ -63,7 +73,7 @@
               <h4>What treatment are you interested in?</h4>
               <div class="row">
                 <div class="col-xs-8">
-                  <input class="form-control" ng-model="treatment"/>
+                  <input class="form-control" ng-model="treatment.name"/>
                 </div>
                 <div class="col-xs-4">
 
@@ -74,7 +84,18 @@
               <h4>What outcome are you interested in?</h4>
               <div class="row">
                 <div class="col-xs-8">
-                  <input class="form-control" ng-model="outcome" />
+                  <input class="form-control" ng-model="outcome.name" />
+                </div>
+                <div class="col-xs-4">
+
+                </div>
+              </div>
+            </div>
+            <div ng-if="treatment.name && treatment.name !== '' && outcome.name && outcome.name != ''">
+              <h4>What would you like to compare to Zoloft in terms of risk of Insomnia?</h4>
+              <div class="row">
+                <div class="col-xs-8">
+                  <input class="form-control"  />
                 </div>
                 <div class="col-xs-4">
 
@@ -83,10 +104,7 @@
             </div>
           </div>
           <hr>
-          <div id="answer-section">
-            <h4>Answers</h4>
 
-          </div>
         </div>
       </div>
     </div>
