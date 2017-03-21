@@ -1,5 +1,8 @@
 # OHDSI 2017 Face to Face Starter Template
 
+## NOTE
+This is hackathon code and we still need to clean it up/finish features.
+
 ## Installation Guide
 * [Install Node](https://nodejs.org/en/download/)
 * Install Grunt (optional)
